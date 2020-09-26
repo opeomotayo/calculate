@@ -6,7 +6,7 @@ pipeline {
     }
 	
     stages {
-	stage('Install') {
+	stage('Unit Test') {
             steps {
                 sh "mvn -f maths/pom.xml clean test cobertura:cobertura -Dcobertura.report.format=xml"
             }
