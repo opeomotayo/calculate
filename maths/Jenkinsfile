@@ -6,11 +6,17 @@ pipeline {
     }
 	
     stages {
-		stage('Unit Tests') {
-            steps{
-                sh 'mvn -f maths/pom.xml clean test'
+	stage('Install') {
+            steps {
+                sh "mvn -f maths/pom.xml clean test cobertura:cobertura -Dcobertura.report.format=xml"
             }
-        }
+            post {
+                always {
+                    junit '**/target/*-reports/TEST-*.xml'
+                    step([$class: 'CoberturaPublisher', coberturaReportFile: 'target/site/cobertura/coverage.xml'])
+                }
+            }
+        }	
        		
         stage ('Artifactory configuration') {
             steps {
