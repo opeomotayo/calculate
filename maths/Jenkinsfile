@@ -19,8 +19,7 @@ pipeline {
         #            sh 'mvn -f maths/pom.xml clean sonar:sonar -Dmaven.test.skip=true'
         #        }
         #    }
-
-        }
+        #}
 	
 	stage("Quality Gate") {
             steps {
